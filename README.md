@@ -1,2 +1,17 @@
 # Python-Ransomware
-This is a python ransomware i made for EDUCATIONAL pourpaces and NOTHING else
+This is a Python ransomware I made for **EDUCATIONAL** purposes and **NOTHING** else.
+
+# How to use **ETHICALLY**
+1. Download the ```ransomware.py``` file.
+2. Run it (**IN AN EMPTY FOLDER OR VM**)
+
+## WARNING
+**THIS IS A PROJECT TO SHOW HOW EASILY MALWARE CAN BE MADE**
+**IT IS NOT MEANT TO BE USED FOR REAL-WORLD ATTACKS OR TO HARM ANYONE**
+**DOING SO IS ILLEGAL AND PROHIBITED**
+
+## CHARGES OF CYBERCRIME:
+1. FINES UP TO **$200,000**
+2. IMPRISONMENT **10–20 YEARS**
+
+**DO NOT COMMIT CYBERCRIME**
