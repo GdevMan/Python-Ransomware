@@ -5,7 +5,7 @@ This is a Python ransomware I made for **EDUCATIONAL** purposes and **NOTHING** 
 1. Create a virtual machine (use linux or windows as the code can detect it automaticly)
 2. Git clone the program **IN THE VM**
 3. cd into the ```Python-Ransomware``` directory
-4. run ```python ransomware.py``` **IN THE VM**
+4. run ```python ransomware.py``` or ```python obf_ransomware.py``` **IN THE VM**
 5. Watch as it encrypts your Desktop
 
 # WARNING
